@@ -4,8 +4,6 @@ template<typename T>
 std::pair<std::vector<T>,float> DecisionTree<T>::findBestRecommmendation(const T& value) const
 {
     auto table=shrinkTableToContainingGoal(value);
-    //posortować po oceanach
-    //posortować po ilości- najwyższa ocean tylko
     auto highestValue=std::max_element(table.begin(),table.end(),[](const auto& p1, const auto&p2){
         return p1.second<p2.second;
     })->second;
@@ -21,7 +19,7 @@ std::pair<std::vector<T>,float> DecisionTree<T>::findBestRecommmendation(const T
                 }
             }
         }
-    }
+    } 
     return table[bestMatch];
 }
 
