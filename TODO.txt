@@ -1,0 +1,3 @@
+Problem:
+-Dane jest wiele zbiorów cech
+-określić prawdopodobieństwo żezostanie wybrana jedna cecha X z cech Y,jesli zostan<a wybrane też inne cechy
