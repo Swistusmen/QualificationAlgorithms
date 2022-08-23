@@ -36,7 +36,9 @@ std::vector<std::pair<std::vector<T>,float>> DecisionTree<T>::shrinkTableToConta
                         buffer.emplace_back(d.first);
                     }
                 }
+                if(buffer.size()>1){
                 map.insert(buffer,it.second);
+                }
             }
         }
     }
@@ -47,8 +49,11 @@ template<typename T>
 void DecisionTree<T>::calculate()
 {
     auto set=getOrderedSet();
+    std::cout<<"Mam sety\n";
     auto ginis=calculateGiniIndexes(set);
+    std::cout<<"Mam wspolczynniki giniego\n";
     auto qualifiers=createQualifiers(ginis);
+    std::cout<<"Mam kwalifikatory\n";
     output=createDesisionTree(qualifiers, {},Data);
 }
 
@@ -63,7 +68,6 @@ std::vector<std::pair<T,int>> DecisionTree<T>::getOrderedSet()
             return p.first==element;});
 
             if(found!=set.end()){
-
                 set.at(found-set.begin()).second+=1;
             }else{
                 set.emplace_back(element,1);
@@ -112,6 +116,10 @@ std::vector<Qualifier<T>> DecisionTree<T>::createQualifiers(std::vector<std::pai
 template<typename T>
 std::vector<std::pair<std::vector<std::pair<T,bool>>,float>> DecisionTree<T>::createDesisionTree(std::vector<Qualifier<T>> q, std::vector<std::pair<T,bool>> usedQ,std::vector<std::vector<T>> v)
 {
+    //TODO: optimize- write version with tail recursion
+    //TODO: optimize write version which is iterative
+    //TODO: make it parallel
+    //Bottleneck
    if(q.empty()){
     return {};
    }
